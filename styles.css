@@ -1,28 +1,32 @@
+/* ---Global Styles--- */
 * {
   margin: 0;
   padding: 0;
 }
-
 html,
 body {
   scroll-behavior: smooth;
 }
+
+/* ---Tag Styles--- */
 header {
-  width: 100%;
   padding: 0.5rem;
   display: flex;
   justify-content: center;
   color: #4e442e;
 }
-h1 {
-  font-size: 1.5rem;
-}
 main {
   padding: 1rem 1.5rem;
 }
-
 body {
   background: #e5eef4;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  margin-bottom: 1.5rem;
 }
 
 button {
@@ -43,6 +47,7 @@ button:focus {
   outline: solid 2px black;
 }
 
+/* ---Show and Hide classes--- */
 .show {
   display: block;
 }
@@ -50,6 +55,10 @@ button:focus {
   display: none;
 }
 
+/* ---Form Styles--- */
+.form {
+  margin-left: 0.5rem;
+}
 .input-group {
   margin-bottom: 1rem;
   width: 15rem;
@@ -60,4 +69,11 @@ button:focus {
 .form input {
   font-size: 1rem;
   padding: 0.2rem 0.4rem;
+}
+
+/* ---Simulation Styles--- */
+.simulation-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
 }
