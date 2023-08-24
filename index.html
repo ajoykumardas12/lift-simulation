@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lift Simulation</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Lift Simulation - @RealDevSquad</h1>
+    </header>
+    <main>
+      <section id="lift-form-container" class="show">
+        <form class="form" onsubmit="simulateLift(event)">
+          <div class="input-group">
+            <label for="noOfFloors">No of Floors</label>
+            <input
+              type="number"
+              id="noOfFloors"
+              name="noOfFloors"
+              min="0"
+              max="10"
+              class=""
+              placeholder="Enter no of Floors"
+            />
+          </div>
+          <div class="input-group">
+            <label for="noOfLifts">No of Lifts</label>
+            <input
+              type="number"
+              id="noOfLifts"
+              name="noOfLifts"
+              min="1"
+              max="10"
+              class=""
+              placeholder="Enter no of Lifts"
+            />
+          </div>
+          <button type="submit" class="button simulate-button">Simulate</button>
+        </form>
+      </section>
+      <section id="lift-simulation-container" class="hide">
+        simulation
+        <button class="button back-button" onclick="backToForm()">
+          Go back
+        </button>
+      </section>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>
