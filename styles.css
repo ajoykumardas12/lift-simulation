@@ -44,7 +44,7 @@ button:hover {
   background: #21313d;
 }
 button:focus {
-  outline: solid 2px black;
+  outline: solid 1px black;
 }
 
 /* ---Show and Hide classes--- */

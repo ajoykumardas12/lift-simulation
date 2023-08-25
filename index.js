@@ -12,7 +12,12 @@ const building = document.getElementById("building");
 
 // -------Store-------
 let noOfFloors = 0;
-var noOfLifts = 0;
+let noOfLifts = 0;
+
+let upButtons;
+let downButtons;
+
+let allLifts;
 
 // -------Building creation functions-------
 const getFormData = () => {
@@ -79,7 +84,6 @@ const createFloorControlsEl = (floorNo) => {
 
   const [upButton, downButton] = createButtons();
 
-  console.log(floorNo, noOfFloors);
   if (floorNo !== noOfFloors) floorControlsEl.appendChild(upButton);
   if (floorNo !== 1) floorControlsEl.appendChild(downButton);
 
@@ -144,6 +148,31 @@ const createBuilding = () => {
   building.appendChild(liftsContainer);
 };
 
+// -------Simulation controller functions-------
+const callLift = (floorNo) => {
+  console.log(`lift called on floor ${floorNo}`);
+  allLifts[0].style.bottom = `${(floorNo - 1) * 5}rem`;
+};
+
+const addListenerToButtons = () => {
+  upButtons = document.querySelectorAll(".up-button");
+  downButtons = document.querySelectorAll(".down-button");
+
+  upButtons.forEach((upButton, index) => {
+    // top floor don't have up button, reduce 1 extra
+    upButton.addEventListener("click", () => callLift(noOfFloors - index - 1));
+  });
+
+  downButtons.forEach((downButton, index) => {
+    downButton.addEventListener("click", () => callLift(noOfFloors - index));
+  });
+};
+
+const getAllLifts = () => {
+  allLifts = document.querySelectorAll(".lift");
+  console.log(allLifts);
+};
+
 // -------Event functions-------
 const simulateLift = (event) => {
   // Hides form and creates lift simulation on "Simulate" button click
@@ -153,6 +182,8 @@ const simulateLift = (event) => {
   if (!isValidData) return;
   toggleHideShow();
   createBuilding();
+  addListenerToButtons();
+  getAllLifts();
 };
 
 const backToForm = () => {
