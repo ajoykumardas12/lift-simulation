@@ -83,6 +83,7 @@ button:focus {
 }
 .building {
   width: 90%;
+  position: relative;
 }
 .floor {
   height: 5rem;
@@ -124,6 +125,46 @@ button:focus {
 .button-icon {
   width: 1.3rem;
 }
+
+.lifts-container {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  top: 0;
+  left: 10%;
+  outline: 1px solid #bdc8cf;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 0.5rem;
+}
+.liftline {
+  width: 10%;
+  max-width: 4.1rem;
+  height: 100%;
+  outline: 1px dashed rebeccapurple;
+  position: relative;
+}
+.lift {
+  width: 100%;
+  max-width: 4rem;
+  height: 4.5rem;
+  position: absolute;
+  bottom: 0;
+  background: #4e442e;
+  border: 1px solid #21313d;
+}
+
 div[floor-no="1"] .up-button {
   margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 640px) {
+  .building {
+    width: 100%;
+  }
+  .lifts-container {
+    width: 75%;
+    left: 15%;
+  }
 }

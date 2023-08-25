@@ -14,7 +14,7 @@ const building = document.getElementById("building");
 let noOfFloors = 0;
 var noOfLifts = 0;
 
-// -------Functions-------
+// -------Building creation functions-------
 const getFormData = () => {
   noOfFloors = Number(noOfFloorsEl.value);
   noOfLifts = Number(noOfLiftsEl.value);
@@ -104,16 +104,47 @@ const createFloor = (floorNo) => {
   return floor;
 };
 
+const createLift = (liftNo) => {
+  const lift = newElement("div", "lift");
+  lift.setAttribute("lift-no", liftNo);
+  return lift;
+};
+
+const createLiftLine = (liftNo) => {
+  const liftLine = newElement("div", "liftline");
+  liftLine.setAttribute("liftline-no", liftNo);
+
+  const lift = createLift(liftNo);
+  lift.setAttribute("lift-no", liftNo);
+  lift.setAttribute("current-floor", 0);
+  liftLine.appendChild(lift);
+
+  return liftLine;
+};
+
+const createLiftsContainer = () => {
+  const liftsContainer = newElement("div", "lifts-container");
+
+  const liftsArr = Array.from({ length: noOfLifts }, (_, i) => i + 1);
+  liftsArr.forEach((liftNo) => {
+    const liftLine = createLiftLine(liftNo);
+    liftsContainer.appendChild(liftLine);
+  });
+  return liftsContainer;
+};
+
 const createBuilding = () => {
   // Creates building with data from form and adds to DOM
   const floorArr = Array.from({ length: noOfFloors }, (_, i) => noOfFloors - i);
   floorArr.forEach((floorNo) => {
     const floor = createFloor(floorNo);
-    console.log(floor);
     building.appendChild(floor);
   });
+  const liftsContainer = createLiftsContainer();
+  building.appendChild(liftsContainer);
 };
 
+// -------Event functions-------
 const simulateLift = (event) => {
   // Hides form and creates lift simulation on "Simulate" button click
   event.preventDefault();
