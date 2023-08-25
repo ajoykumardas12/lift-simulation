@@ -16,20 +16,24 @@
         <form class="form" onsubmit="simulateLift(event)">
           <div class="input-group">
             <label for="noOfFloors">No of Floors</label>
+            <!-- remove value later -->
             <input
               type="number"
               id="noOfFloors"
               name="noOfFloors"
+              value="7"
               class=""
               placeholder="Enter no of Floors"
             />
           </div>
           <div class="input-group">
             <label for="noOfLifts">No of Lifts</label>
+            <!-- remove value later -->
             <input
               type="number"
               id="noOfLifts"
               name="noOfLifts"
+              value="6"
               class=""
               placeholder="Enter no of Lifts"
             />
@@ -43,6 +47,9 @@
           <button class="button back-button" onclick="backToForm()">
             Go back
           </button>
+        </div>
+        <div class="building-container">
+          <div id="building" class="building"></div>
         </div>
       </section>
     </main>

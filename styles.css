@@ -77,3 +77,53 @@ button:focus {
   align-items: start;
   justify-content: space-between;
 }
+.building-container {
+  display: flex;
+  justify-content: center;
+}
+.building {
+  width: 90%;
+}
+.floor {
+  height: 5rem;
+  display: flex;
+  align-items: end;
+  gap: 0.2rem;
+}
+.floor-area {
+  flex: 1;
+  position: relative;
+}
+.floor-area:after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  background: #354857;
+  z-index: 5;
+}
+.floor-controls {
+  margin-bottom: 0.5rem;
+  width: 4rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.floor button {
+  font-size: 0.75rem;
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+.up-button {
+  background: #838640;
+}
+.button-icon {
+  width: 1.3rem;
+}
+div[floor-no="1"] .up-button {
+  margin-bottom: 2rem;
+}
