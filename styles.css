@@ -153,6 +153,8 @@ button:focus {
   bottom: 0;
   background: #4e442e;
   border: 1px solid #21313d;
+  transform: translateY(0);
+  transition-timing-function: ease;
 }
 
 div[floor-no="1"] .up-button {

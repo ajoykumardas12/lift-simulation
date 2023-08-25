@@ -18,6 +18,7 @@ let upButtons;
 let downButtons;
 
 let allLifts;
+let allLiftsData = [];
 
 // -------Building creation functions-------
 const getFormData = () => {
@@ -149,9 +150,27 @@ const createBuilding = () => {
 };
 
 // -------Simulation controller functions-------
+const moveLift = (lift, floorNo, lastFloor) => {
+  // Update translateY for moving animation
+  const t = 2 * Math.abs(floorNo - lastFloor);
+  lift.style.transitionDuration = `${t}s`;
+  lift.style.transform = `translateY(-${(floorNo - 1) * 5}rem)`;
+
+  // Update lift data
+  allLiftsData.lift1.lastFloor = floorNo;
+  allLiftsData.lift1.busy = true;
+
+  // Change busy status when complete
+  setTimeout(() => {
+    console.log("moved");
+    // TODO: open/close door
+    allLiftsData.lift1.busy = false;
+  }, t * 1000);
+};
+
 const callLift = (floorNo) => {
   console.log(`lift called on floor ${floorNo}`);
-  allLifts[0].style.bottom = `${(floorNo - 1) * 5}rem`;
+  moveLift(allLifts[0], floorNo, allLiftsData.lift1.lastFloor);
 };
 
 const addListenerToButtons = () => {
@@ -173,6 +192,18 @@ const getAllLifts = () => {
   console.log(allLifts);
 };
 
+const setInitialLiftData = () => {
+  for (let i = 1; i <= noOfLifts; i++) {
+    const id = `lift${i}`;
+    const data = {
+      lastFloor: 1,
+      busy: false,
+      direction: "up",
+    };
+    allLiftsData = { ...allLiftsData, [id]: data };
+  }
+};
+
 // -------Event functions-------
 const simulateLift = (event) => {
   // Hides form and creates lift simulation on "Simulate" button click
@@ -184,6 +215,8 @@ const simulateLift = (event) => {
   createBuilding();
   addListenerToButtons();
   getAllLifts();
+  setInitialLiftData();
+  console.log(allLiftsData);
 };
 
 const backToForm = () => {
