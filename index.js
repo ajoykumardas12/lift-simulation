@@ -20,6 +20,8 @@ let downButtons;
 let allLifts;
 let allLiftsData = [];
 
+let allFloorsData = [];
+
 // -------Building creation functions-------
 const getFormData = () => {
   noOfFloors = Number(noOfFloorsEl.value);
@@ -158,7 +160,9 @@ const moveLift = (liftNo, floorNo, lastFloor) => {
 
   // Update lift data
   allLiftsData[`lift${liftNo}`].lastFloor = floorNo;
-  allLiftsData[`lift${liftNo}`].busy = true;
+  allLiftsData[`lift${liftNo}`].isBusy = true;
+  // Update floor data
+  allFloorsData[`floor${floorNo}`].isALiftComing = true;
 
   // Change busy status when complete
   setTimeout(() => {
@@ -166,22 +170,21 @@ const moveLift = (liftNo, floorNo, lastFloor) => {
     allLifts[liftNo - 1].classList.add("open-close-animation");
     setTimeout(() => {
       allLifts[liftNo - 1].classList.remove("open-close-animation");
-      allLiftsData[`lift${liftNo}`].busy = false;
+      allLiftsData[`lift${liftNo}`].isBusy = false;
+      allFloorsData[`floor${floorNo}`].isALiftComing = false;
     }, 5000);
   }, t * 1000);
 };
 
 const findBestLift = (floorNo) => {
   let bestLiftNo;
-
   let nearestDistance = Infinity;
 
   for (let i = 1; i <= noOfLifts; i++) {
     const liftId = `lift${i}`;
-    console.log(liftId);
     if (
       Math.abs(allLiftsData[liftId].lastFloor - floorNo) < nearestDistance &&
-      allLiftsData[liftId].busy === false
+      allLiftsData[liftId].isBusy === false
     ) {
       nearestDistance = allLiftsData[liftId].lastFloor - floorNo;
       bestLiftNo = i;
@@ -192,8 +195,9 @@ const findBestLift = (floorNo) => {
 };
 
 const callLift = (floorNo) => {
+  // If a lift is already coming to this floor, do noting
+  if (allFloorsData[`floor${floorNo}`].isALiftComing) return;
   const bestLiftNo = findBestLift(floorNo);
-  console.log(bestLiftNo);
   moveLift(bestLiftNo, floorNo, allLiftsData[`lift${bestLiftNo}`].lastFloor);
 };
 
@@ -220,9 +224,19 @@ const setInitialLiftData = () => {
     const id = `lift${i}`;
     const data = {
       lastFloor: 1,
-      busy: false,
+      isBusy: false,
     };
     allLiftsData = { ...allLiftsData, [id]: data };
+  }
+};
+
+const setInitialFloorData = () => {
+  for (let i = 1; i <= noOfFloors; i++) {
+    const id = `floor${i}`;
+    const data = {
+      isALiftComing: false,
+    };
+    allFloorsData = { ...allFloorsData, [id]: data };
   }
 };
 
@@ -238,6 +252,7 @@ const simulateLift = (event) => {
   addListenerToButtons();
   getAllLifts();
   setInitialLiftData();
+  setInitialFloorData();
 };
 
 const backToForm = () => {

@@ -103,7 +103,6 @@ button:focus {
   position: absolute;
   bottom: 0;
   background: #354857;
-  z-index: 5;
 }
 .floor-controls {
   margin-bottom: 0.5rem;
@@ -175,6 +174,9 @@ button:focus {
   width: 50%;
   height: 100%;
   background: #354857;
+}
+.left-door {
+  border-right: 1px solid #59666e;
 }
 .open-close-animation .door {
   animation: open-close-animation 5s;
