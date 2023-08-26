@@ -61,10 +61,10 @@ const createButtons = () => {
   // creates and returns [up, down] buttons
   const upIcon = document.createElement("img");
   upIcon.className = "button-icon up-icon";
-  upIcon.src = "/assets/icons/caret-up-circle-outline.svg";
+  upIcon.src = "/assets/icons/caret-up-outline.svg";
   const downIcon = document.createElement("img");
   downIcon.className = "button-icon down-icon";
-  downIcon.src = "/assets/icons/caret-down-circle-outline.svg";
+  downIcon.src = "/assets/icons/caret-down-outline.svg";
 
   const upButton = newElement("button", "up-button");
   upButton.appendChild(upIcon);
@@ -150,31 +150,51 @@ const createBuilding = () => {
 };
 
 // -------Simulation controller functions-------
-const moveLift = (lift, floorNo, lastFloor) => {
+const moveLift = (liftNo, floorNo, lastFloor) => {
   // Update translateY for moving animation
   const t = 2 * Math.abs(floorNo - lastFloor);
-  lift.style.transitionDuration = `${t}s`;
-  lift.style.transform = `translateY(-${(floorNo - 1) * 5}rem)`;
+  allLifts[liftNo - 1].style.transitionDuration = `${t}s`;
+  allLifts[liftNo - 1].style.transform = `translateY(-${(floorNo - 1) * 5}rem)`;
 
   // Update lift data
-  allLiftsData.lift1.lastFloor = floorNo;
-  allLiftsData.lift1.busy = true;
+  allLiftsData[`lift${liftNo}`].lastFloor = floorNo;
+  allLiftsData[`lift${liftNo}`].busy = true;
 
   // Change busy status when complete
   setTimeout(() => {
-    console.log("moved");
     // TODO: open/close door
-    lift.classList.add("open-close-animation");
+    allLifts[liftNo - 1].classList.add("open-close-animation");
     setTimeout(() => {
-      lift.classList.remove("open-close-animation");
+      allLifts[liftNo - 1].classList.remove("open-close-animation");
+      allLiftsData[`lift${liftNo}`].busy = false;
     }, 5000);
-    allLiftsData.lift1.busy = false;
   }, t * 1000);
 };
 
+const findBestLift = (floorNo) => {
+  let bestLiftNo;
+
+  let nearestDistance = Infinity;
+
+  for (let i = 1; i <= noOfLifts; i++) {
+    const liftId = `lift${i}`;
+    console.log(liftId);
+    if (
+      Math.abs(allLiftsData[liftId].lastFloor - floorNo) < nearestDistance &&
+      allLiftsData[liftId].busy === false
+    ) {
+      nearestDistance = allLiftsData[liftId].lastFloor - floorNo;
+      bestLiftNo = i;
+    }
+  }
+
+  return bestLiftNo;
+};
+
 const callLift = (floorNo) => {
-  console.log(`lift called on floor ${floorNo}`);
-  moveLift(allLifts[0], floorNo, allLiftsData.lift1.lastFloor);
+  const bestLiftNo = findBestLift(floorNo);
+  console.log(bestLiftNo);
+  moveLift(bestLiftNo, floorNo, allLiftsData[`lift${bestLiftNo}`].lastFloor);
 };
 
 const addListenerToButtons = () => {
@@ -193,7 +213,6 @@ const addListenerToButtons = () => {
 
 const getAllLifts = () => {
   allLifts = document.querySelectorAll(".lift");
-  console.log(allLifts);
 };
 
 const setInitialLiftData = () => {
@@ -202,7 +221,6 @@ const setInitialLiftData = () => {
     const data = {
       lastFloor: 1,
       busy: false,
-      direction: "up",
     };
     allLiftsData = { ...allLiftsData, [id]: data };
   }
@@ -220,7 +238,6 @@ const simulateLift = (event) => {
   addListenerToButtons();
   getAllLifts();
   setInitialLiftData();
-  console.log(allLiftsData);
 };
 
 const backToForm = () => {
