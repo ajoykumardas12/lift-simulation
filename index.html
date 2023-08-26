@@ -8,11 +8,11 @@
   </head>
   <body>
     <header>
-      <h1>Lift Simulation - @RealDevSquad</h1>
+      <h1>Lift Simulation</h1>
     </header>
     <main>
       <section id="lift-form-container" class="show">
-        <h2>Provide simulation details</h2>
+        <h2 class="form-header">Provide simulation details</h2>
         <form class="form" onsubmit="simulateLift(event)">
           <div class="input-group">
             <label for="noOfFloors">No of Floors</label>
@@ -21,7 +21,7 @@
               type="number"
               id="noOfFloors"
               name="noOfFloors"
-              value="7"
+              value="10"
               class=""
               placeholder="Enter no of Floors"
             />
@@ -33,7 +33,7 @@
               type="number"
               id="noOfLifts"
               name="noOfLifts"
-              value="4"
+              value="10"
               class=""
               placeholder="Enter no of Lifts"
             />
@@ -45,7 +45,7 @@
         <div class="simulation-header">
           <h2>Simulation</h2>
           <button class="button back-button" onclick="backToForm()">
-            Go back
+            Back to form
           </button>
         </div>
         <div class="building-container">

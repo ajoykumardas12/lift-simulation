@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap");
 /* ---Global Styles--- */
 * {
   margin: 0;
@@ -7,6 +8,9 @@ html,
 body {
   scroll-behavior: smooth;
 }
+body {
+  font-family: "League Spartan", sans-serif;
+}
 
 /* ---Tag Styles--- */
 header {
@@ -14,12 +18,19 @@ header {
   display: flex;
   justify-content: center;
   color: #4e442e;
+  text-align: center;
 }
 main {
   padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 body {
   background: #e5eef4;
+}
+
+main > section {
+  width: 100%;
 }
 
 h1 {
@@ -58,7 +69,13 @@ button:focus {
 
 /* ---Form Styles--- */
 .form {
-  margin-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-header {
+  margin-top: 5rem;
+  text-align: center;
 }
 .input-group {
   margin-bottom: 1rem;
@@ -103,17 +120,17 @@ button:focus {
   position: absolute;
   bottom: 0;
   background: #354857;
+  z-index: 2;
 }
 .floor-controls {
   margin-bottom: 0.5rem;
-  width: 2.5rem;
+  max-width: 2.5rem;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 .floor button {
-  font-size: 0.75rem;
   padding: 0.3rem;
   display: flex;
   align-items: center;
@@ -137,6 +154,9 @@ button:focus {
 .button-icon {
   width: 1.3rem;
 }
+.floor-no {
+  font-size: 0.9rem;
+}
 
 .lifts-container {
   position: absolute;
@@ -154,7 +174,6 @@ button:focus {
   width: 10%;
   max-width: 4.1rem;
   height: 100%;
-  outline: 1px dashed rebeccapurple;
   position: relative;
 }
 .lift {
@@ -169,6 +188,7 @@ button:focus {
   transition-timing-function: ease;
   display: flex;
   justify-content: space-between;
+  z-index: 5;
 }
 .door {
   width: 50%;
@@ -196,12 +216,56 @@ div[floor-no="1"] .up-button {
   margin-bottom: 2rem;
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 768px) {
   .building {
     width: 100%;
   }
+  .floor-no {
+    font-size: 0.7rem;
+  }
+  .floor button {
+    padding: 0.2rem;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  main {
+    padding: 1rem 1rem;
+  }
   .lifts-container {
-    width: 75%;
-    left: 15%;
+    width: 78%;
+    left: 11%;
+  }
+  .floor-controls {
+    max-width: 2rem;
+  }
+  .floor button {
+    padding: 0.1rem;
+  }
+  .floor-no {
+    font-size: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .lifts-container {
+    outline: none;
+  }
+  .floor-controls {
+    max-width: 1.8rem;
+  }
+  .up-button > img,
+  .down-button > img {
+    width: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .floor-controls {
+    max-width: 1.5rem;
+  }
+  .up-button > img,
+  .down-button > img {
+    width: 0.9rem;
   }
 }
