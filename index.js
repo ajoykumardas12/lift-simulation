@@ -68,13 +68,9 @@ const createButtons = () => {
 
   const upButton = newElement("button", "up-button");
   upButton.appendChild(upIcon);
-  const upTextNode = document.createTextNode("Up");
-  upButton.appendChild(upTextNode);
 
   const downButton = newElement("button", "down-button");
   downButton.appendChild(downIcon);
-  const downTextNode = document.createTextNode("Down");
-  downButton.appendChild(downTextNode);
 
   return [upButton, downButton];
 };
@@ -112,6 +108,10 @@ const createFloor = (floorNo) => {
 const createLift = (liftNo) => {
   const lift = newElement("div", "lift");
   lift.setAttribute("lift-no", liftNo);
+  const lDoor = newElement("div", "door left-door");
+  const rDoor = newElement("div", "door right-door");
+  lift.appendChild(lDoor);
+  lift.appendChild(rDoor);
   return lift;
 };
 
@@ -164,6 +164,10 @@ const moveLift = (lift, floorNo, lastFloor) => {
   setTimeout(() => {
     console.log("moved");
     // TODO: open/close door
+    lift.classList.add("open-close-animation");
+    setTimeout(() => {
+      lift.classList.remove("open-close-animation");
+    }, 5000);
     allLiftsData.lift1.busy = false;
   }, t * 1000);
 };

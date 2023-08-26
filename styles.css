@@ -44,6 +44,7 @@ button:hover {
   background: #21313d;
 }
 button:focus {
+  background: #21313d;
   outline: solid 1px black;
 }
 
@@ -106,7 +107,7 @@ button:focus {
 }
 .floor-controls {
   margin-bottom: 0.5rem;
-  width: 4rem;
+  width: 2.5rem;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -117,10 +118,22 @@ button:focus {
   padding: 0.3rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.1rem;
+}
+.floor button:hover,
+.floor button:focus {
+  scale: 1.1;
 }
 .up-button {
   background: #838640;
+}
+.up-button:hover {
+  background: #66692c;
+}
+.up-button:focus {
+  background: #66692c;
+  outline: solid 1px black;
 }
 .button-icon {
   width: 1.3rem;
@@ -151,10 +164,30 @@ button:focus {
   height: 4.5rem;
   position: absolute;
   bottom: 0;
-  background: #4e442e;
+  background: #b8cbda;
   border: 1px solid #21313d;
   transform: translateY(0);
   transition-timing-function: ease;
+  display: flex;
+  justify-content: space-between;
+}
+.door {
+  width: 50%;
+  height: 100%;
+  background: #354857;
+}
+.open-close-animation .door {
+  animation: open-close-animation 5s;
+}
+
+@keyframes open-close-animation {
+  0%,
+  100% {
+    width: 50%;
+  }
+  50% {
+    width: 0%;
+  }
 }
 
 div[floor-no="1"] .up-button {
