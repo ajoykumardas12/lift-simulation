@@ -197,7 +197,7 @@ const findBestLift = (floorNo) => {
       Math.abs(allLiftsData[liftId].lastFloor - floorNo) < nearestDistance &&
       allLiftsData[liftId].isBusy === false
     ) {
-      nearestDistance = allLiftsData[liftId].lastFloor - floorNo;
+      nearestDistance = Math.abs(allLiftsData[liftId].lastFloor - floorNo);
       bestLiftNo = i;
     }
   }
@@ -216,15 +216,6 @@ const handlePendingCalls = () => {
 
 const callLift = (floorNo) => {
   // Handles lift calls
-  // If a lift is already coming to this floor, do noting(printed to console)
-  // if (
-  //   allFloorsData[`floor${floorNo}`].isALiftComing ||
-  //   pendingCalls.includes(floorNo)
-  // ) {
-  //   console.log("A lift is already coming to this floor.");
-  //   return;
-  // }
-
   // Finds best lift available for the call
   const bestLiftNo = findBestLift(floorNo);
   // If a lift is available, call moveLift, else push the call in pendingCalls
