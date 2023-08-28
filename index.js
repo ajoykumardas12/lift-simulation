@@ -216,6 +216,16 @@ const handlePendingCalls = () => {
 
 const callLift = (floorNo) => {
   // Handles lift calls
+
+  // If a lift is already coming to this floor, do noting(printed to console)
+  if (
+    allFloorsData[`floor${floorNo}`].isALiftComing ||
+    pendingCalls.includes(floorNo)
+  ) {
+    console.log(`A lift is already coming to floor ${floorNo}`);
+    return;
+  }
+
   // Finds best lift available for the call
   const bestLiftNo = findBestLift(floorNo);
   // If a lift is available, call moveLift, else push the call in pendingCalls
